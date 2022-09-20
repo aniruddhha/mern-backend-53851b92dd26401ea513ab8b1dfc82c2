@@ -1,0 +1,22 @@
+{
+  "name": "first-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aniruddhha/mern-backend-53851b92dd26401ea513ab8b1dfc82c2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aniruddhha/mern-backend-53851b92dd26401ea513ab8b1dfc82c2/issues"
+  },
+  "homepage": "https://github.com/aniruddhha/mern-backend-53851b92dd26401ea513ab8b1dfc82c2#readme",
+  "dependencies": {
+    "react": "^18.2.0"
+  }
+}
