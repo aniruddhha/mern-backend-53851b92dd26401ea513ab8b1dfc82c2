@@ -16,6 +16,7 @@ const onRequest = (req, res) => {
         })
         req.on('end', () => {
             console.log(body)
+            res.writeHead(201)
             res.end('success')
         })
     }else {
