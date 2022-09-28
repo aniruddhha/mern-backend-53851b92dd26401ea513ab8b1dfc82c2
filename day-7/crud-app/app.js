@@ -46,6 +46,10 @@ app.get('/', (req, res) => {
 
 app.put('/', (req, res) => {
     // homework : complete this code
+
+    // fetch('http://google.com').then( res => res.json() ).then( dt => {
+    //     // mongo queries
+    // } )
 } )
 
 app.delete('/', (req, res) => {
