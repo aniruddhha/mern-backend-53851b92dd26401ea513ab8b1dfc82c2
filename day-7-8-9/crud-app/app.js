@@ -6,20 +6,30 @@ mongoose.connect('mongodb://localhost:27017/test').then( () => {
 })
 
 const CarSchema = new mongoose.Schema({
-    model : { type : String, unique : true },
+    model : { type : String, unique : true }, // small tractor
+    slug : { type: String, unique: true }, // small-tractor
     country : { type : Number},
     isFwd : { type : Boolean },
     make : { type : String }
 })
 
-CarSchema.pre('save', next => {
-    console.log('PRE : Middleware Executed')
-    next()
+CarSchema.pre('save', async function() {
+    console.log(`Waiting`) // 1 1
+     await new Promise( (res, rej) => { 
+        setTimeout( () => {
+            console.log(`Data Fetched`) // 2 3
+            res()
+        } , 1500)
+    })
+
+    console.log(`I have reached this line`) // 3 2
 })
 
-CarSchema.post('save', doc => {
-    console.log('POST : Middleware Executed')
-    console.log('ID : ' + doc._id)
+CarSchema.pre('save', function(next) {
+    console.log('PRE : Middleware Executed')
+    console.log(this)
+    this.slug = slugifyModel(this.model)
+    next()
 })
 
 CarSchema.post('save', (error, doc, next) => {
@@ -40,7 +50,6 @@ app.listen(9000, () => console.log('✅ Car Server Started'))
 
 app.post('/', express.json() ,(req, res) => {
     const reqCar = req.body // fetch the data from request
-    console.log(reqCar)
 
     //es6 version
     const dbObj = new Car({ ...reqCar })
@@ -72,6 +81,12 @@ app.put('/', (req, res) => {
 app.delete('/', (req, res) => {
      // homework : complete this code
 } )
+
+function slugifyModel(model) {
+    return model.toString()
+                .toLowerCase()
+                .replaceAll(' ', '-')
+}
 
 
 
