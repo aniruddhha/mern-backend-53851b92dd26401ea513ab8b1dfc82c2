@@ -12,6 +12,9 @@ const AppUser = mongoose.model('AppUser', AppUserSchema)
 const express = require('express')
 const app = express()
 
+const jwt = require('jsonwebtoken')
+const { expressjwt } = require("express-jwt");
+
 app.post('/login', express.json() ,(req, res) => {
     const { userName, password } = req.body
 
@@ -26,9 +29,16 @@ app.post('/login', express.json() ,(req, res) => {
         }
 
         console.log(appUser)
+
+        const token = jwt.sign(
+            appUser, 
+            'abc123', 
+            {  algorithm : 'HS256' }
+        )
+
         res.json({ 
             sts: 'sucess', 
-            token :'not implemented yet', 
+            token , 
             msg :'✅ User LoggedIn Successfully' 
         })
     })
@@ -38,3 +48,7 @@ app.listen(6000, () => {
 })
 
 // 3. Add Jwt Security
+
+
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NjU0MTc1NzN9.X6gHr7sgmWde8kTtRzwN75qitIv1bxtzP4e204ZZpH0c
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFiYzEyMyIsInBhc3N3b3JkIjoiYWJjMTIzIiwiaWQiOiI2MzQwNTA5MmVmN2ZjY2NhODY5Y2NlYzYiLCJpYXQiOjE2NjU0MTc2ODB9.3RyAScFVxjlFFdaazBSeH6YlhCUeL0UGT8fv-hrZtOs
