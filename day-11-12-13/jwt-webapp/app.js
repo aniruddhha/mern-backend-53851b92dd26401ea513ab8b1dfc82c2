@@ -45,8 +45,7 @@ app.post('/login', express.json() ,(req, res) => {
 })
 
 // 👇 this endpoint needs to be accessible only to admin users
-app.post(
-    '/newuser', 
+app.post('/newuser', 
     express.json(), // converts json string to javascript object
     expressjwt({ secret: "abc123", algorithms: ["HS256"] }) , // first 3 steps are performed by this
     (req, res) => {
